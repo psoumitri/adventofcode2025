@@ -21,7 +21,7 @@ fn rotate_dial( start_pos: i64, rotation: &str ) -> Result<(i64, i64), String> {
 }
 
 fn determine_code( filename: &str ) -> Result<i64, String> { 
-    let instr = utils::read_instructions(filename)?;
+    let instr = utils::read_lines(filename)?;
     let mut start_pos = 50;
     let mut code = 0;
     for rotation in instr { 
@@ -35,12 +35,7 @@ fn determine_code( filename: &str ) -> Result<i64, String> {
 
 pub fn solve(test: bool) -> Result<(), String> { 
     let filename = if test { "dec01.test.input" } else { "dec01.input" };
-    let path = env::current_dir()
-        .map_err(|e| format!("Failed to resolve path: {}", e))?
-        .display()
-        .to_string();
-    let filepath = path + "/src/" + filename;
-    let s = determine_code(&filepath);
+    let s = determine_code(filename);
     match s { 
         Ok(c) => println!("Code is: {}", c),
         Err(e) => eprintln!("Failed with: {}", e)
