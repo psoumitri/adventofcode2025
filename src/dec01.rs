@@ -1,4 +1,3 @@
-use std::env;
 use crate::utils;
 
 fn rotate_dial( start_pos: i64, rotation: &str ) -> Result<(i64, i64), String> { 
@@ -20,8 +19,7 @@ fn rotate_dial( start_pos: i64, rotation: &str ) -> Result<(i64, i64), String> {
     Ok( (nz, end_pos) )
 }
 
-fn determine_code( filename: &str ) -> Result<i64, String> { 
-    let instr = utils::read_lines(filename)?;
+fn determine_code( instr: Vec<String> ) -> Result<i64, String> { 
     let mut start_pos = 50;
     let mut code = 0;
     for rotation in instr { 
@@ -34,8 +32,8 @@ fn determine_code( filename: &str ) -> Result<i64, String> {
 }
 
 pub fn solve(test: bool) -> Result<(), String> { 
-    let filename = if test { "dec01.test.input" } else { "dec01.input" };
-    let s = determine_code(filename);
+    let instr = utils::read_lines(test, "dec01")?;
+    let s = determine_code(instr);
     match s { 
         Ok(c) => println!("Code is: {}", c),
         Err(e) => eprintln!("Failed with: {}", e)

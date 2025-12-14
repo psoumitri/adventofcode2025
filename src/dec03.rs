@@ -21,8 +21,7 @@ fn get_joltage(config: &str, num_digits: usize) -> u64 {
 }
 
 pub fn solve(test: bool) -> Result<(), String> { 
-    let filename = if test { "dec03.test.input" } else { "dec03.input" };
-    let configs = utils::read_lines(filename)?;
+    let configs = utils::read_lines(test, "dec03")?;
     let mut total_joltage = 0;
     for config in configs { 
         total_joltage += get_joltage(&config, 12);

@@ -26,8 +26,7 @@ fn get_invalids(start: i64, end: i64) -> Vec<i64> {
 
 pub fn solve(test: bool) -> Result<(), String> { 
     let mut total: i64 = 0;
-    let filename = if test { "dec02.test.input" } else { "dec02.input" };
-    let ranges= utils::read_lines(filename)?
+    let ranges= utils::read_lines(test, "dec02")?
         .first()
         .expect("failed to read file")
         .split(',').map(|s| s.to_owned()).collect::<Vec<String>>();

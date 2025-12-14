@@ -34,13 +34,11 @@ fn count_pickable_rolls(grid: &Vec<Vec<char>> ) -> ( Vec<Vec<char>>, u64 ) {
 }
 
 pub fn solve(test: bool) -> Result<(), String> { 
-    let filename = if test { "dec04.test.input" } else { "dec04.input" };
-    let grid : Vec<Vec<char>> = utils::read_lines(filename).unwrap_or_else(|e| {
-        eprintln!("failed to read file: {} with err: {}", filename, e);
-        Vec::new()
-    }).into_iter()
-    .map(|line| line.chars().collect::<Vec<char>>())
-    .collect();
+    let grid : Vec<Vec<char>> = utils::read_lines(test, "dec04")
+        .unwrap_or_else(|_e| {Vec::new()})
+        .into_iter()
+        .map(|line| line.chars().collect::<Vec<char>>())
+        .collect();
     let mut have_rolls_to_pick = true;
     let mut total_rolls_picked = 0;
     let mut target_grid = grid;
