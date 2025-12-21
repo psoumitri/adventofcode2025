@@ -61,7 +61,7 @@ fn solve_part2(operations: Vec<&str>, inputstr: Vec<String>) {
             nums.push(num);
         }
     };
-    result += operate(operations[i], &nums);
+    if nums.len() > 0 { result += operate(operations[i], &nums); }
     println!("[Part2] Overall total: {}", result);
 }
 
